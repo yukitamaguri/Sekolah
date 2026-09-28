@@ -102,11 +102,19 @@
     img.dataset.assetError = 'true';
     img.removeAttribute('data-asset-loading');
 
-    img.removeAttribute('src');
+    // Gambar yang belum tersedia memakai placeholder.svg,
+    // bukan gambar lain seperti logo sekolah.
+    const placeholderURL = new URL('placeholder.svg', IMAGE_BASE).href;
+
+    // Lepaskan handler percobaan sebelumnya agar placeholder
+    // tidak dianggap sebagai gambar asli yang berhasil ditemukan.
+    img.onload = null;
+    img.onerror = null;
+    img.src = placeholderURL;
 
     console.warn(
       `[SCHOOL MEDIA] Gambar tidak ditemukan: "${asset}"`,
-      `\nDicari di: ${buildURL(asset)}`
+      `\nMenggunakan placeholder: ${placeholderURL}`
     );
   }
 
