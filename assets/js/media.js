@@ -69,19 +69,31 @@
       return null;
     }
 
-    // Gambar dari internet / data URL
+    // Gambar dari internet / data URL.
     if (isRemote(value)) {
       return value;
     }
 
-    // Jika sudah ada ekstensi:
-    // robotik.jpg -> robotik.jpg
-    // logo-sekolah.png -> logo-sekolah.png
-    const filename = hasExtension(value)
-      ? value
-      : `${value}.jpg`;
+    // Jika nama file sudah lengkap, gunakan apa adanya.
+    if (hasExtension(value)) {
+      return new URL(value, IMAGE_BASE).href;
+    }
 
-    return new URL(filename, IMAGE_BASE).href;
+    // Untuk nama tanpa ekstensi, URL utama memakai .jpg.
+    // load() akan mencoba .jpg, .jpeg, lalu .png jika gagal.
+    return new URL(`${value}.jpg`, IMAGE_BASE).href;
+  }
+
+  function candidateURLs(asset) {
+    const value = String(asset || '').trim();
+
+    if (!value || isRemote(value) || hasExtension(value)) {
+      return buildURL(value) ? [buildURL(value)] : [];
+    }
+
+    return ['.jpg', '.jpeg', '.png', '.webp'].map(ext =>
+      new URL(`${value}${ext}`, IMAGE_BASE).href
+    );
   }
 
   function markMissing(img, asset) {
@@ -120,61 +132,36 @@
       return;
     }
 
-    const src = buildURL(value);
+    const candidates = candidateURLs(value);
 
-    if (!src) {
+    if (!candidates.length) {
       markMissing(img, value);
       return;
     }
 
-    // Gambar eksternal
-    if (isRemote(value)) {
-      img.onload = () => {
-        cache.set(value, img.currentSrc || img.src);
+    let index = 0;
 
-        img.classList.remove('asset-missing');
-        img.dataset.assetResolved = 'true';
-        img.dataset.assetError = 'false';
-        img.removeAttribute('data-asset-loading');
-      };
-
-      img.onerror = () => {
-        markMissing(img, value);
-      };
-
-      img.src = src;
-      return;
-    }
-
-    /*
-     * Gambar lokal.
-     *
-     * Tidak lagi mencoba:
-     * assets/images/
-     * images/
-     * ./
-     *
-     * karena itu bisa membuat debugging GitHub Pages sulit.
-     *
-     * Sekarang langsung menuju:
-     * assets/images/nama-file.jpg
-     */
-    img.onload = () => {
+    const success = () => {
       cache.set(value, img.currentSrc || img.src);
-
       img.classList.remove('asset-missing');
       img.dataset.assetResolved = 'true';
       img.dataset.assetError = 'false';
       img.removeAttribute('data-asset-loading');
     };
 
-    img.onerror = () => {
-      markMissing(img, value);
+    const tryNext = () => {
+      if (index >= candidates.length) {
+        markMissing(img, value);
+        return;
+      }
+
+      img.src = candidates[index++];
     };
 
+    img.onload = success;
+    img.onerror = tryNext;
     img.dataset.assetError = 'false';
-
-    img.src = src;
+    tryNext();
   }
 
   function bind(root = document) {
