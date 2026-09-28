@@ -299,12 +299,11 @@
   function imageMarkup(asset, alt) {
     const value = String(asset || '').trim();
 
-    // Foto yang belum ditambahkan sengaja dibiarkan kosong.
-    if (!value) {
-      return '<div class="media-empty" aria-hidden="true"></div>';
-    }
+    // Foto yang belum ditambahkan memakai placeholder.
+    // Tidak menggunakan logo atau foto lain sebagai pengganti.
+    const resolvedAsset = value || 'placeholder';
 
-    return `<img data-asset="${escapeHTML(value)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">`;
+    return `<img data-asset="${escapeHTML(resolvedAsset)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">`;
   }
 
   function renderList(selector, items) {
