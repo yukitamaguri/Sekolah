@@ -297,7 +297,14 @@
   }
 
   function imageMarkup(asset, alt) {
-    return `<img src="assets/images/placeholder.svg" data-asset="${escapeHTML(asset)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">`;
+    const value = String(asset || '').trim();
+
+    // Foto yang belum ditambahkan sengaja dibiarkan kosong.
+    if (!value) {
+      return '<div class="media-empty" aria-hidden="true"></div>';
+    }
+
+    return `<img data-asset="${escapeHTML(value)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">`;
   }
 
   function renderList(selector, items) {
