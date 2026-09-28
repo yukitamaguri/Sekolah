@@ -102,7 +102,7 @@
     img.dataset.assetError = 'true';
     img.removeAttribute('data-asset-loading');
 
-    img.src = PLACEHOLDER_SRC;
+    img.removeAttribute('src');
 
     console.warn(
       `[SCHOOL MEDIA] Gambar tidak ditemukan: "${asset}"`,
