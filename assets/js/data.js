@@ -57,16 +57,16 @@ window.SCHOOL_DATA = {
 
   // 05 — Kegiatan
   activities: [
-    { title: 'Digital Studentpreneur', category: 'Teknologi', date: '2025', text: 'Kegiatan pengembangan kreativitas dan kewirausahaan digital peserta didik.', image: '' },
+    { title: 'Digital Studentpreneur', category: 'Teknologi', date: '2025', text: 'Kegiatan pengembangan kreativitas dan kewirausahaan digital peserta didik.', image: 'halaman-depan' },
     { title: 'Peringatan Hari Pahlawan', category: 'Sekolah', date: '17 November 2025', text: 'Kegiatan reflektif dan edukatif untuk menumbuhkan semangat kebangsaan.', image: '' },
-    { title: 'P5 Urban Farming', category: 'Lingkungan', date: '2025', text: 'Pembelajaran berbasis proyek yang mengajak siswa mengenal pengelolaan lingkungan dan pangan.', image: '' },
+    { title: 'P5 Urban Farming', category: 'Lingkungan', date: '2025', text: 'Pembelajaran berbasis proyek yang mengajak siswa mengenal pengelolaan lingkungan dan pangan.', image: 'lingkungan-sekolah' },
     { title: 'Pembiasaan Siswa', category: 'Karakter', date: '2025', text: 'Rangkaian aktivitas pembiasaan positif sebagai bagian dari budaya sekolah.', image: '' },
     { title: '[JUDUL KEGIATAN]', category: 'Sekolah', date: '[TANGGAL]', text: '[DESKRIPSI KEGIATAN]', image: '' }
   ],
 
   // 06 — Prestasi
   achievements: [
-    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: '' },
+    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: 'lingkungan-sekolah' },
     { title: 'Juara 3 O2SN Karate Putra', category: 'Olahraga', year: '2025', text: 'Prestasi tingkat Provinsi Jawa Timur pada cabang karate putra.', image: '' },
     { title: 'Juara 2 Kyoguri Cadet Putri', category: 'Olahraga', year: '2025', text: 'Juara 2 dalam ajang KAPOLRI Cup 6.', image: '' },
     { title: '[NAMA PRESTASI]', category: 'Akademik', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: '' },
@@ -75,11 +75,11 @@ window.SCHOOL_DATA = {
 
   // 07 — Galeri
   gallery: [
-    { title: 'Halaman depan sekolah saat senja', category: 'Sekolah', image: '' },
-    { title: 'Area tengah dan ruang aktivitas siswa', category: 'Sekolah', image: '' },
-    { title: 'Koridor sekolah menjelang sore', category: 'Fasilitas', image: '' },
-    { title: 'Identitas SMP Negeri 1 Porong', category: 'Identitas', image: '' },
-    { title: 'Ruang terbuka dan lingkungan sekolah', category: 'Lingkungan', image: '' },
+    { title: 'Halaman depan sekolah saat senja', category: 'Sekolah', image: 'halaman-depan' },
+    { title: 'Area tengah dan ruang aktivitas siswa', category: 'Sekolah', image: 'area-tengah' },
+    { title: 'Koridor sekolah menjelang sore', category: 'Fasilitas', image: 'koridor-sekolah' },
+    { title: 'Identitas SMP Negeri 1 Porong', category: 'Identitas', image: 'galeri-04' },
+    { title: 'Ruang terbuka dan lingkungan sekolah', category: 'Lingkungan', image: 'lingkungan-sekolah' },
     { title: '[JUDUL FOTO]', category: 'Kegiatan', image: '' },
     { title: '[JUDUL FOTO]', category: 'Pembelajaran', image: '' },
     { title: '[JUDUL FOTO]', category: 'Kegiatan', image: '' }
