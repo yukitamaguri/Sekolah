@@ -39,50 +39,50 @@ window.SCHOOL_DATA = {
 
   // 03 — Fasilitas
   facilities: [
-    { title: 'Perpustakaan', text: 'Perpustakaan konvensional dan digital untuk mendukung budaya literasi.', image: 'perpustakaan' },
-    { title: 'Laboratorium', text: 'Laboratorium IPA dan komputer untuk pembelajaran berbasis praktik dan teknologi.', image: 'laboratorium' },
-    { title: 'Olahraga', text: 'Area olahraga untuk sepak bola, basket, voli, dan bulu tangkis.', image: 'olahraga' },
-    { title: 'Ruang Kesenian', text: 'Ruang pengembangan kreativitas seni dan kegiatan ekspresi peserta didik.', image: 'ruang-kesenian' }
+    { title: 'Perpustakaan', text: 'Perpustakaan konvensional dan digital untuk mendukung budaya literasi.', image: '' },
+    { title: 'Laboratorium', text: 'Laboratorium IPA dan komputer untuk pembelajaran berbasis praktik dan teknologi.', image: '' },
+    { title: 'Olahraga', text: 'Area olahraga untuk sepak bola, basket, voli, dan bulu tangkis.', image: '' },
+    { title: 'Ruang Kesenian', text: 'Ruang pengembangan kreativitas seni dan kegiatan ekspresi peserta didik.', image: '' }
   ],
 
   // 04 — Ekstrakurikuler
   extracurriculars: [
     { title: 'Robotik', category: 'Teknologi', text: 'Eksplorasi robotika, logika, dan pemecahan masalah melalui proyek kreatif.', image: 'robotik' },
     { title: 'Pramuka', category: 'Karakter', text: 'Pembentukan kepemimpinan, kemandirian, kedisiplinan, dan kerja sama.', image: 'pramuka' },
-    { title: 'Olahraga', category: 'Olahraga', text: 'Pembinaan kebugaran dan sportivitas melalui berbagai cabang olahraga.', image: 'olahraga' },
-    { title: 'Seni & Budaya', category: 'Seni', text: 'Ruang bagi peserta didik untuk mengembangkan bakat seni dan budaya.', image: 'galeri-04' },
-    { title: 'Paduan Suara', category: 'Seni', text: 'Latihan vokal, musikalitas, dan penampilan dalam kegiatan sekolah.', image: 'halaman-depan' },
-    { title: 'Karya Digital', category: 'Teknologi', text: 'Kegiatan kreatif untuk membangun keterampilan digital dan komunikasi.', image: 'koridor-sekolah' }
+    { title: 'Olahraga', category: 'Olahraga', text: 'Pembinaan kebugaran dan sportivitas melalui berbagai cabang olahraga.', image: '' },
+    { title: 'Seni & Budaya', category: 'Seni', text: 'Ruang bagi peserta didik untuk mengembangkan bakat seni dan budaya.', image: '' },
+    { title: 'Paduan Suara', category: 'Seni', text: 'Latihan vokal, musikalitas, dan penampilan dalam kegiatan sekolah.', image: '' },
+    { title: 'Karya Digital', category: 'Teknologi', text: 'Kegiatan kreatif untuk membangun keterampilan digital dan komunikasi.', image: '' }
   ],
 
   // 05 — Kegiatan
   activities: [
-    { title: 'Digital Studentpreneur', category: 'Teknologi', date: '2025', text: 'Kegiatan pengembangan kreativitas dan kewirausahaan digital peserta didik.', image: 'halaman-depan' },
-    { title: 'Peringatan Hari Pahlawan', category: 'Sekolah', date: '17 November 2025', text: 'Kegiatan reflektif dan edukatif untuk menumbuhkan semangat kebangsaan.', image: 'galeri-04' },
-    { title: 'P5 Urban Farming', category: 'Lingkungan', date: '2025', text: 'Pembelajaran berbasis proyek yang mengajak siswa mengenal pengelolaan lingkungan dan pangan.', image: 'galeri-04' },
-    { title: 'Pembiasaan Siswa', category: 'Karakter', date: '2025', text: 'Rangkaian aktivitas pembiasaan positif sebagai bagian dari budaya sekolah.', image: 'lingkungan-sekolah' },
-    { title: '[JUDUL KEGIATAN]', category: 'Sekolah', date: '[TANGGAL]', text: '[DESKRIPSI KEGIATAN]', image: 'koridor-sekolah' }
+    { title: 'Digital Studentpreneur', category: 'Teknologi', date: '2025', text: 'Kegiatan pengembangan kreativitas dan kewirausahaan digital peserta didik.', image: '' },
+    { title: 'Peringatan Hari Pahlawan', category: 'Sekolah', date: '17 November 2025', text: 'Kegiatan reflektif dan edukatif untuk menumbuhkan semangat kebangsaan.', image: '' },
+    { title: 'P5 Urban Farming', category: 'Lingkungan', date: '2025', text: 'Pembelajaran berbasis proyek yang mengajak siswa mengenal pengelolaan lingkungan dan pangan.', image: '' },
+    { title: 'Pembiasaan Siswa', category: 'Karakter', date: '2025', text: 'Rangkaian aktivitas pembiasaan positif sebagai bagian dari budaya sekolah.', image: '' },
+    { title: '[JUDUL KEGIATAN]', category: 'Sekolah', date: '[TANGGAL]', text: '[DESKRIPSI KEGIATAN]', image: '' }
   ],
 
   // 06 — Prestasi
   achievements: [
-    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: 'lingkungan-sekolah' },
-    { title: 'Juara 3 O2SN Karate Putra', category: 'Olahraga', year: '2025', text: 'Prestasi tingkat Provinsi Jawa Timur pada cabang karate putra.', image: 'galeri-04' },
-    { title: 'Juara 2 Kyoguri Cadet Putri', category: 'Olahraga', year: '2025', text: 'Juara 2 dalam ajang KAPOLRI Cup 6.', image: 'galeri-04' },
-    { title: '[NAMA PRESTASI]', category: 'Akademik', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: 'halaman-depan' },
-    { title: '[NAMA PRESTASI]', category: 'Seni', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: 'galeri-04' }
+    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: '' },
+    { title: 'Juara 3 O2SN Karate Putra', category: 'Olahraga', year: '2025', text: 'Prestasi tingkat Provinsi Jawa Timur pada cabang karate putra.', image: '' },
+    { title: 'Juara 2 Kyoguri Cadet Putri', category: 'Olahraga', year: '2025', text: 'Juara 2 dalam ajang KAPOLRI Cup 6.', image: '' },
+    { title: '[NAMA PRESTASI]', category: 'Akademik', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: '' },
+    { title: '[NAMA PRESTASI]', category: 'Seni', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: '' }
   ],
 
   // 07 — Galeri
   gallery: [
-    { title: 'Halaman depan sekolah saat senja', category: 'Sekolah', image: 'halaman-depan' },
-    { title: 'Area tengah dan ruang aktivitas siswa', category: 'Sekolah', image: 'lingkungan-sekolah' },
-    { title: 'Koridor sekolah menjelang sore', category: 'Fasilitas', image: 'koridor-sekolah' },
-    { title: 'Identitas SMP Negeri 1 Porong', category: 'Identitas', image: 'galeri-04' },
-    { title: 'Ruang terbuka dan lingkungan sekolah', category: 'Lingkungan', image: 'galeri-04' },
-    { title: '[JUDUL FOTO]', category: 'Kegiatan', image: 'halaman-depan' },
-    { title: '[JUDUL FOTO]', category: 'Pembelajaran', image: 'lingkungan-sekolah' },
-    { title: '[JUDUL FOTO]', category: 'Kegiatan', image: 'koridor-sekolah' }
+    { title: 'Halaman depan sekolah saat senja', category: 'Sekolah', image: '' },
+    { title: 'Area tengah dan ruang aktivitas siswa', category: 'Sekolah', image: '' },
+    { title: 'Koridor sekolah menjelang sore', category: 'Fasilitas', image: '' },
+    { title: 'Identitas SMP Negeri 1 Porong', category: 'Identitas', image: '' },
+    { title: 'Ruang terbuka dan lingkungan sekolah', category: 'Lingkungan', image: '' },
+    { title: '[JUDUL FOTO]', category: 'Kegiatan', image: '' },
+    { title: '[JUDUL FOTO]', category: 'Pembelajaran', image: '' },
+    { title: '[JUDUL FOTO]', category: 'Kegiatan', image: '' }
   ],
 
   // 08 — Media
