@@ -309,8 +309,18 @@
   function renderList(selector, items) {
     const root = $(selector);
     if (!root) return;
+
+    const detailType = selector.includes('achievements')
+      ? 'achievements'
+      : selector.includes('extracurriculars')
+        ? 'extracurriculars'
+        : 'activities';
+
     root.innerHTML = items.map((item, index) => `
-      <article class="item reveal ${index % 2 ? 'from-right' : 'zoom'}" data-category="${escapeHTML(item.category)}">
+      <article class="item reveal ${index % 2 ? 'from-right' : 'zoom'}"
+        data-category="${escapeHTML(item.category)}"
+        data-detail-type="${detailType}"
+        data-detail-index="${index}">
         ${imageMarkup(item.image, item.title)}
         <div class="item-body">
           <div class="meta">${escapeHTML(item.category)} · ${escapeHTML(item.year || item.date || '')}</div>
@@ -325,7 +335,9 @@
     const root = $('[data-facilities]');
     if (!root) return;
     root.innerHTML = DATA.facilities.map((item, index) => `
-      <article class="facility reveal ${index % 2 ? 'from-right' : 'zoom'}">
+      <article class="facility reveal ${index % 2 ? 'from-right' : 'zoom'}"
+        data-detail-type="facilities"
+        data-detail-index="${index}">
         ${imageMarkup(item.image, item.title)}
         <div class="facility-body">
           <h3>${escapeHTML(item.title)}</h3>
@@ -364,6 +376,86 @@
   }
 
   // ------------------------------------------------------------
+  // Image detail panel
+  // ------------------------------------------------------------
+  function setupDetailPanel() {
+    const modal = document.createElement('div');
+    modal.className = 'media-detail';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <div class="media-detail-backdrop" data-detail-close></div>
+      <section class="media-detail-panel" role="dialog" aria-modal="true" aria-labelledby="media-detail-title">
+        <button class="media-detail-close" type="button" aria-label="Tutup" data-detail-close>&times;</button>
+        <div class="media-detail-media"><img alt="" decoding="async"></div>
+        <div class="media-detail-content">
+          <div class="media-detail-meta"></div>
+          <h2 id="media-detail-title"></h2>
+          <p></p>
+        </div>
+      </section>`;
+    document.body.appendChild(modal);
+
+    const image = $('.media-detail-media img', modal);
+    const meta = $('.media-detail-meta', modal);
+    const title = $('#media-detail-title', modal);
+    const text = $('.media-detail-content p', modal);
+
+    const collections = {
+      activities: DATA.activities,
+      achievements: DATA.achievements,
+      extracurriculars: DATA.extracurriculars,
+      facilities: DATA.facilities,
+      gallery: DATA.gallery
+    };
+
+    function openDetail(card) {
+      const type = card.dataset.detailType;
+      const index = Number(card.dataset.detailIndex);
+      const item = collections[type]?.[index];
+      if (!item) return;
+
+      const period = item.year || item.date || '';
+      meta.textContent = [item.category, period].filter(Boolean).join(' · ');
+      title.textContent = item.title;
+      text.textContent = item.text || 'Belum ada informasi tambahan.';
+      image.alt = item.title;
+
+      if (window.SCHOOL_MEDIA) {
+        window.SCHOOL_MEDIA.refresh(image, item.image || 'placeholder');
+      } else {
+        image.src = 'assets/images/placeholder.svg';
+      }
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-lock');
+      modal.querySelector('.media-detail-close')?.focus();
+    }
+
+    function closeDetail() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-lock');
+    }
+
+    document.addEventListener('click', event => {
+      const imageTarget = event.target.closest('[data-detail-type] img[data-asset]');
+      if (imageTarget) {
+        event.preventDefault();
+        event.stopPropagation();
+        openDetail(imageTarget.closest('[data-detail-type]'));
+        return;
+      }
+      if (event.target.closest('[data-detail-close]')) closeDetail();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!modal.classList.contains('open')) return;
+      if (event.key === 'Escape') closeDetail();
+    });
+  }
+
+  // ------------------------------------------------------------
   // Gallery + lightbox
   // ------------------------------------------------------------
   function setupGallery() {
@@ -373,16 +465,17 @@
 
     roots.forEach(root => {
       root.innerHTML = DATA.gallery.map((item, index) => `
-        <figure class="gallery-item reveal ${index % 2 ? 'from-right' : 'zoom'}" data-category="${escapeHTML(item.category)}" data-index="${index}">
+        <figure class="gallery-item reveal ${index % 2 ? 'from-right' : 'zoom'}" data-category="${escapeHTML(item.category)}" data-index="${index}" data-detail-type="gallery" data-detail-index="${index}">
           ${imageMarkup(item.image, item.title)}
           <figcaption class="gallery-label">${escapeHTML(item.category)}</figcaption>
         </figure>
       `).join('');
 
       root.addEventListener('click', event => {
-        const item = event.target.closest('.gallery-item');
-        if (!item) return;
-        openLightbox(Number(item.dataset.index), root);
+        const image = event.target.closest('.gallery-item img[data-asset]');
+        if (!image) return;
+        event.preventDefault();
+        event.stopPropagation();
       });
     });
 
@@ -456,6 +549,7 @@
     renderList('[data-list="extracurriculars-home"]', DATA.extracurriculars.slice(0, 3));
     renderFacilities();
     setupGallery();
+    setupDetailPanel();
     bindMedia();
     setupFilters();
     enhanceMotionTargets();
