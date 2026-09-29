@@ -385,12 +385,24 @@
     modal.innerHTML = `
       <div class="media-detail-backdrop" data-detail-close></div>
       <section class="media-detail-panel" role="dialog" aria-modal="true" aria-labelledby="media-detail-title">
-        <button class="media-detail-close" type="button" aria-label="Tutup" data-detail-close>&times;</button>
-        <div class="media-detail-media"><img alt="" decoding="async"></div>
+        <div class="media-detail-topbar">
+          <span class="media-detail-kicker">Informasi</span>
+          <button class="media-detail-close" type="button" aria-label="Tutup panel" data-detail-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="media-detail-media">
+          <img alt="" decoding="async">
+          <div class="media-detail-media-shade"></div>
+          <div class="media-detail-image-status" aria-hidden="true">Foto belum ditambahkan</div>
+        </div>
         <div class="media-detail-content">
           <div class="media-detail-meta"></div>
           <h2 id="media-detail-title"></h2>
           <p></p>
+          <div class="media-detail-footer">
+            <span class="media-detail-hint">Tekan Esc untuk menutup</span>
+          </div>
         </div>
       </section>`;
     document.body.appendChild(modal);
@@ -399,6 +411,9 @@
     const meta = $('.media-detail-meta', modal);
     const title = $('#media-detail-title', modal);
     const text = $('.media-detail-content p', modal);
+    const status = $('.media-detail-image-status', modal);
+    const closeButton = $('.media-detail-close', modal);
+    let lastFocused = null;
 
     const collections = {
       activities: DATA.activities,
@@ -414,14 +429,21 @@
       const item = collections[type]?.[index];
       if (!item) return;
 
+      lastFocused = document.activeElement;
       const period = item.year || item.date || '';
-      meta.textContent = [item.category, period].filter(Boolean).join(' · ');
-      title.textContent = item.title;
+      const metaParts = [item.category, period].filter(Boolean);
+      meta.textContent = metaParts.join(' · ');
+      meta.hidden = !metaParts.length;
+      title.textContent = item.title || 'Informasi sekolah';
       text.textContent = item.text || 'Belum ada informasi tambahan.';
-      image.alt = item.title;
+
+      const hasImage = Boolean(String(item.image || '').trim());
+      modal.classList.toggle('is-placeholder', !hasImage);
+      status.hidden = hasImage;
+      image.alt = item.title || 'Gambar informasi';
 
       if (window.SCHOOL_MEDIA) {
-        window.SCHOOL_MEDIA.refresh(image, item.image || 'placeholder');
+        window.SCHOOL_MEDIA.refresh(image, hasImage ? item.image : 'placeholder');
       } else {
         image.src = 'assets/images/placeholder.svg';
       }
@@ -429,13 +451,16 @@
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('menu-lock');
-      modal.querySelector('.media-detail-close')?.focus();
+      requestAnimationFrame(() => closeButton?.focus());
     }
 
     function closeDetail() {
+      if (!modal.classList.contains('open')) return;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('menu-lock');
+      lastFocused?.focus?.();
+      lastFocused = null;
     }
 
     document.addEventListener('click', event => {
@@ -452,6 +477,13 @@
     document.addEventListener('keydown', event => {
       if (!modal.classList.contains('open')) return;
       if (event.key === 'Escape') closeDetail();
+      if (event.key === 'Tab') {
+        const focusables = [closeButton].filter(Boolean);
+        if (focusables.length && document.activeElement === focusables[0]) {
+          event.preventDefault();
+          focusables[0].focus();
+        }
+      }
     });
   }
 
