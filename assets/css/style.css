@@ -786,3 +786,145 @@ body.detail-lock { overflow: hidden; }
     transition: none !important;
   }
 }
+
+
+/* ============================================================
+   MEDIA DETAIL — MOBILE-FIRST V3
+   Robust on Android even when browser uses desktop layout mode.
+   ============================================================ */
+
+/* Make the dialog itself independent from the page's layout. */
+.media-detail {
+  overscroll-behavior: contain;
+}
+
+.media-detail-card {
+  isolation: isolate;
+}
+
+/* Phones / touch devices: force a single-column bottom sheet.
+   This also works when Chrome reports a desktop-sized viewport. */
+@media (pointer: coarse) and (hover: none) {
+  .media-detail {
+    place-items: end center;
+    padding: 12px;
+  }
+
+  .media-detail-card {
+    width: min(100%, 680px);
+    max-height: min(92dvh, 760px);
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(220px, 42dvh) auto !important;
+    border-radius: 26px;
+    transform: translateY(36px) scale(.985);
+  }
+
+  .media-detail.is-visible .media-detail-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .media-detail-media {
+    min-height: 0;
+    height: auto;
+  }
+
+  .media-detail-image-wrap {
+    position: absolute;
+    inset: 0;
+  }
+
+  .media-detail-content {
+    min-height: 0;
+    max-height: 46dvh;
+    overflow-y: auto;
+    padding: 24px 22px 22px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .media-detail-kicker {
+    margin-bottom: 9px;
+    padding: 7px 11px;
+    font-size: 9px;
+  }
+
+  .media-detail-meta {
+    margin-bottom: 9px;
+    font-size: 10px;
+  }
+
+  .media-detail-title {
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1;
+    letter-spacing: -.04em;
+  }
+
+  .media-detail-description {
+    max-width: none;
+    margin-top: 13px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .media-detail-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .media-detail-action {
+    min-height: 46px;
+  }
+
+  .media-detail-close {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .media-detail-image-caption {
+    left: 16px;
+    bottom: 14px;
+  }
+}
+
+@media (pointer: coarse) and (hover: none) and (max-width: 520px) {
+  .media-detail {
+    padding: 8px;
+  }
+
+  .media-detail-card {
+    width: 100%;
+    max-height: 94dvh;
+    grid-template-rows: minmax(210px, 40dvh) auto !important;
+    border-radius: 24px;
+  }
+
+  .media-detail-content {
+    max-height: 49dvh;
+    padding: 22px 20px 18px;
+  }
+
+  .media-detail-title {
+    font-size: clamp(27px, 8.5vw, 36px);
+  }
+
+  .media-detail-description {
+    font-size: 14px;
+  }
+
+  .media-detail-footer {
+    margin-top: 18px;
+  }
+}
+
+/* If the viewport is genuinely narrow, keep the same mobile treatment. */
+@media (max-width: 820px) {
+  .media-detail-card {
+    grid-template-columns: 1fr !important;
+  }
+}
