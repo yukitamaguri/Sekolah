@@ -310,7 +310,7 @@
     const root = $(selector);
     if (!root) return;
     root.innerHTML = items.map((item, index) => `
-      <article class="item reveal ${index % 2 ? 'from-right' : 'zoom'}" data-category="${escapeHTML(item.category)}">
+      <article class="item reveal ${index % 2 ? 'from-right' : 'zoom'}" data-category="${escapeHTML(item.category || '')}" data-index="${index}" tabindex="0" role="button" aria-label="Lihat ${escapeHTML(item.title || 'informasi')}">
         ${imageMarkup(item.image, item.title)}
         <div class="item-body">
           <div class="meta">${escapeHTML(item.category)} · ${escapeHTML(item.year || item.date || '')}</div>
@@ -325,7 +325,7 @@
     const root = $('[data-facilities]');
     if (!root) return;
     root.innerHTML = DATA.facilities.map((item, index) => `
-      <article class="facility reveal ${index % 2 ? 'from-right' : 'zoom'}">
+      <article class="facility reveal ${index % 2 ? 'from-right' : 'zoom'}" data-index="${index}" tabindex="0" role="button" aria-label="Lihat ${escapeHTML(item.title || 'fasilitas')}">
         ${imageMarkup(item.image, item.title)}
         <div class="facility-body">
           <h3>${escapeHTML(item.title)}</h3>
@@ -470,12 +470,22 @@
 
     function bindList(root, items, selector = '.item, .facility') {
       if (!root) return;
-      root.addEventListener('click', event => {
-        const card = event.target.closest(selector);
+      const openFromCard = card => {
         if (!card || !root.contains(card)) return;
         const index = Number(card.dataset.index);
-        const item = Number.isInteger(index) ? items[index] : null;
-        if (item) openDetail(item, card);
+        if (!Number.isInteger(index) || !items[index]) return;
+        openDetail(items[index], card);
+      };
+
+      root.addEventListener('click', event => {
+        openFromCard(event.target.closest(selector));
+      });
+
+      root.addEventListener('keydown', event => {
+        const card = event.target.closest(selector);
+        if (!card || !['Enter', ' '].includes(event.key)) return;
+        event.preventDefault();
+        openFromCard(card);
       });
     }
 
