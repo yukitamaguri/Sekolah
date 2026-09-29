@@ -39,9 +39,9 @@ window.SCHOOL_DATA = {
 
   // 03 — Fasilitas
   facilities: [
-    { title: 'Perpustakaan', text: 'Perpustakaan konvensional dan digital untuk mendukung budaya literasi.', image: '' },
-    { title: 'Laboratorium', text: 'Laboratorium IPA dan komputer untuk pembelajaran berbasis praktik dan teknologi.', image: '' },
-    { title: 'Olahraga', text: 'Area olahraga untuk sepak bola, basket, voli, dan bulu tangkis.', image: '' },
+    { title: 'Perpustakaan', text: 'Perpustakaan konvensional dan digital untuk mendukung budaya literasi.', image: 'area-tengah' },
+    { title: 'Laboratorium', text: 'Laboratorium IPA dan komputer untuk pembelajaran berbasis praktik dan teknologi.', image: 'koridor-sekolah' },
+    { title: 'Olahraga', text: 'Area olahraga untuk sepak bola, basket, voli, dan bulu tangkis.', image: 'lingkungan-sekolah' },
     { title: 'Ruang Kesenian', text: 'Ruang pengembangan kreativitas seni dan kegiatan ekspresi peserta didik.', image: '' }
   ],
 
@@ -66,8 +66,8 @@ window.SCHOOL_DATA = {
 
   // 06 — Prestasi
   achievements: [
-    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: 'lingkungan-sekolah' },
-    { title: 'Juara 3 O2SN Karate Putra', category: 'Olahraga', year: '2025', text: 'Prestasi tingkat Provinsi Jawa Timur pada cabang karate putra.', image: '' },
+    { title: 'Top 10 Kompetisi Inovasi Sidoarjo 2025', category: 'Guru', year: '2025', text: 'Guru SMPN 1 Porong masuk Top 10 KISI dari 216 peserta.', image: 'area-tengah' },
+    { title: 'Juara 3 O2SN Karate Putra', category: 'Olahraga', year: '2025', text: 'Prestasi tingkat Provinsi Jawa Timur pada cabang karate putra.', image: 'lingkungan-sekolah' },
     { title: 'Juara 2 Kyoguri Cadet Putri', category: 'Olahraga', year: '2025', text: 'Juara 2 dalam ajang KAPOLRI Cup 6.', image: '' },
     { title: '[NAMA PRESTASI]', category: 'Akademik', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: '' },
     { title: '[NAMA PRESTASI]', category: 'Seni', year: '[TAHUN]', text: '[DESKRIPSI PRESTASI]', image: '' }
